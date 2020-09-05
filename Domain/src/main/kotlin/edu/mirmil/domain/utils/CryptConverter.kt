@@ -1,4 +1,4 @@
-package edu.mirmil.domain.component
+package edu.mirmil.domain.utils
 
 import org.springframework.beans.factory.annotation.Value
 import java.util.*
