@@ -14,7 +14,7 @@ class UserController(private val userService: UserService) {
 
     @ApiOperation(
         value = "사용자 등록",
-        notes = "사용자 등록을 진행합니다.\nid, password, name를 받습니다.\npassword의 경우 AES방식으로 암호화 하여 저장합니다.",
+        notes = "사용자 등록을 진행합니다.\nid, password, name 를 받습니다.\npassword 의 경우 AES 방식으로 암호화 하여 저장합니다.",
         response = User::class,
         produces = "Application/json"
     )
