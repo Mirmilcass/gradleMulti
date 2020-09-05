@@ -3,12 +3,8 @@ package edu.mirmil.web.controller
 import edu.mirmil.domain.entity.User
 import edu.mirmil.web.service.UserService
 import io.swagger.annotations.*
-import io.swagger.v3.oas.annotations.Parameter
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-import springfox.documentation.annotations.ApiIgnore
+import org.springframework.validation.annotation.Validated
+import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
@@ -24,14 +20,19 @@ class UserController(private val userService: UserService) {
     )
     @ApiImplicitParams(
         value = [
-            ApiImplicitParam(name = "id", required = true, dataType = "String"),
-            ApiImplicitParam(name = "pass", value = "AES Crypt Save", required = true, dataType = "String"),
-            ApiImplicitParam(name = "name", required = true, dataType = "String")
+            ApiImplicitParam(name = "id", required = true),
+            ApiImplicitParam(name = "pass", value = "AES Crypt Save", required = true),
+            ApiImplicitParam(name = "name", required = true)
         ]
     )
     @PostMapping("create")
-    fun created(user: User): User {
+    fun created(@Validated(User.Created::class) @RequestBody user: User): User {
         return userService.create(user)
+    }
+
+    @PostMapping("login")
+    fun login(user: User): User {
+        return userService.login(user)
     }
 
     @PostMapping("findAll")
