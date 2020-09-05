@@ -3,4 +3,4 @@
 gradlew*
 
 *out*
-*build*
+*/build/*
