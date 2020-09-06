@@ -6,6 +6,7 @@ jojoldu.tistory.com
 :toc: left
 :toclevels: 3
 :sectlinks:
+:snippets: ../../../build/generated-snippets
 
 [[introduction]]
 == 소개
@@ -47,7 +48,9 @@ Mirmil Study Spring Rest Docs API
 [[user]]
 == User API
 
-=== Request
+=== Create
+
+==== Request
 
 CURL:
 
@@ -61,7 +64,7 @@ Request HTTP Example:
 
 include::{snippets}/user/create/http-request.adoc[]
 
-=== Response
+==== Response
 
 Response Fields:
 

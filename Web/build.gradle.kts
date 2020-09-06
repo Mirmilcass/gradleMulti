@@ -11,12 +11,20 @@ plugins {
 val snippetsDir by extra { file("build/generated-snippets") }
 
 tasks {
+    test {
+        outputs.dir(snippetsDir)
+        useJUnitPlatform()
+    }
+
     asciidoctor {
         dependsOn(test)
+        sources {
+            include("**/index.adoc")
+        }
+        baseDirFollowsSourceFile()
     }
 
     asciidoctor.get().doLast {
-        println(asciidoctor.get().outputDir)
         copy {
             from("${asciidoctor.get().outputDir}")
             into("src/main/resources/static/docs")
