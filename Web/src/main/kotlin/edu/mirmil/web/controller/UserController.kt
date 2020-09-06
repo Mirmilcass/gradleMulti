@@ -2,36 +2,23 @@ package edu.mirmil.web.controller
 
 import edu.mirmil.domain.entity.User
 import edu.mirmil.web.service.UserService
-import io.swagger.annotations.*
+import org.springframework.http.HttpStatus
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
 @RequestMapping("/user/")
-@Api(description = "사용자 관리")
 class UserController(private val userService: UserService) {
 
-    @ApiOperation(
-        value = "사용자 등록",
-        notes = "사용자 등록을 진행합니다.\nid, password, name 를 받습니다.\npassword 의 경우 AES 방식으로 암호화 하여 저장합니다.",
-        response = User::class,
-        produces = "Application/json"
-    )
-    @ApiImplicitParams(
-        value = [
-            ApiImplicitParam(name = "id", required = true),
-            ApiImplicitParam(name = "pass", value = "AES Crypt Save", required = true),
-            ApiImplicitParam(name = "name", required = true)
-        ]
-    )
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("create")
     fun created(@Validated(User.Created::class) @RequestBody user: User): User {
         return userService.create(user)
     }
 
     @PostMapping("login")
-    fun login(user: User): User {
+    fun login(@RequestBody user: User): String {
         return userService.login(user)
     }
 

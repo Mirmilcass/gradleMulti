@@ -1,0 +1,72 @@
+= Rest Docs Sample API Document
+jojoldu.tistory.com
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+
+[[introduction]]
+== 소개
+
+Mirmil Study Spring Rest Docs API
+
+[[common]]
+//== 공통 사항
+//
+//API에 관계없이 아래 사항을 지켜주셔야 합니다.
+
+== Domain
+
+|===
+| 환경 | domain
+
+| 개발서버 | `dev.edu.mirmil.net`
+| 운영서버 | `edu.mirmil.net`
+|===
+
+//=== Header
+//
+//|===
+//| name | 설명
+//
+//| `Authorization` | API를 사용하기 위한 인증 키
+//|===
+//
+//=== 공통 Response Body
+//
+//|===
+//| field | 설명
+//
+//| `code` | 응답 코드
+//| `message` | 예외사항 내용 등 응답 메세지
+//| `data` | 실제 반환될 데이터
+//|===
+
+[[user]]
+== User API
+
+=== Request
+
+CURL:
+
+include::{snippets}/user/create/curl-request.adoc[]
+
+Request Parameters:
+
+include::{snippets}/user/create/request-fields.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/user/create/http-request.adoc[]
+
+=== Response
+
+Response Fields:
+
+include::{snippets}/user/create/response-fields.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/user/create/http-response.adoc[]

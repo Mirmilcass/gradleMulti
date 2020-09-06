@@ -7,5 +7,5 @@ interface UserService {
     fun create(user: User): User
     fun findAll(): MutableList<User>
     fun findOne(idx: Long): Optional<User>
-    fun login(user: User): User
+    fun login(user: User): String
 }

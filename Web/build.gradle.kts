@@ -4,6 +4,28 @@ plugins {
     id("org.jetbrains.kotlin.plugin.jpa")
     kotlin("kapt")
     war
+
+    id("org.asciidoctor.jvm.convert")
+}
+
+val snippetsDir by extra { file("build/generated-snippets") }
+
+tasks {
+    asciidoctor {
+        dependsOn(test)
+    }
+
+    asciidoctor.get().doLast {
+        println(asciidoctor.get().outputDir)
+        copy {
+            from("${asciidoctor.get().outputDir}")
+            into("src/main/resources/static/docs")
+        }
+    }
+
+    build {
+        dependsOn(asciidoctor)
+    }
 }
 
 dependencies {
@@ -21,9 +43,7 @@ dependencies {
     }
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-
-    // swagger
-    implementation("io.springfox:springfox-boot-starter:3.0.0")
+    testImplementation("org.springframework.restdocs", "spring-restdocs-mockmvc")
 
     // queryDsl
     api("com.querydsl:querydsl-jpa:4.2.2")

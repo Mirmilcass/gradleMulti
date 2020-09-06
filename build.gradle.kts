@@ -9,6 +9,8 @@ plugins {
     id("org.jetbrains.kotlin.kapt") version "1.3.61" apply false
     id("org.jetbrains.kotlin.plugin.jpa") version "1.3.41" apply false
     idea
+
+    id("org.asciidoctor.jvm.convert") version "3.2.0" apply false
 }
 
 allprojects {
