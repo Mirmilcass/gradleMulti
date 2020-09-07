@@ -1,0 +1,19 @@
+==== Request
+
+CURL:
+
+include::{snippets}/user/findAll/curl-request.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/user/findAll/http-request.adoc[]
+
+==== Response
+
+Response Fields:
+
+include::{snippets}/user/findAll/response-fields.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/user/findAll/http-response.adoc[]

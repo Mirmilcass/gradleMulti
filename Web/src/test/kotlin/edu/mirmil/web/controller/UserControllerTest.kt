@@ -3,6 +3,7 @@ package edu.mirmil.web.controller
 import com.google.gson.Gson
 import edu.mirmil.domain.entity.User
 import edu.mirmil.web.RestDocsConfig
+import edu.mirmil.web.service.UserService
 import mu.KotlinLogging
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -27,6 +28,9 @@ class UserControllerTest {
 
     @Autowired
     private lateinit var mockMvc: MockMvc
+
+    @Autowired
+    private lateinit var userService: UserService
 
     private val endPoint = "/user"
 
@@ -68,5 +72,45 @@ class UserControllerTest {
                 )
             )
         log.info { "----------------------------------\n" }
+    }
+
+    @Test
+    @DisplayName("사용자 전제 조회")
+    fun userFindAll() {
+        // 더미 데이터 추가
+        for (i in 1..5) dummyDataCreate(i)
+        val url = "$endPoint/findAll"
+        mockMvc.perform(
+            MockMvcRequestBuilders
+                .post(url)
+                .contentType(MediaType.APPLICATION_JSON)
+        )
+            .andExpect(status().is2xxSuccessful)
+            .andDo { println("result :: ${it.response.contentAsString}") }
+            .andDo(
+                document(
+                    url,
+                    RestDocsConfig.getDocsRequest(),
+                    RestDocsConfig.getDocsResponse(),
+                    responseFields(
+                        fieldWithPath("[].idx").description("인덱스"),
+                        fieldWithPath("[].created").description("생성일"),
+                        fieldWithPath("[].updated").description("수정일"),
+                        fieldWithPath("[].id").description("아이디"),
+                        fieldWithPath("[].name").description("이름")
+                    )
+                )
+            )
+    }
+
+    @Test
+    private fun dummyDataCreate(count: Int = 0) {
+        val data = User(
+            id = "test$count",
+            pass = "test$count",
+            name = "test$count"
+        )
+
+        userService.create(data)
     }
 }

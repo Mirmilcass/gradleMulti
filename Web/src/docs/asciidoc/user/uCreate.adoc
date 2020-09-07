@@ -1,0 +1,23 @@
+==== Request
+
+CURL:
+
+include::{snippets}/user/create/curl-request.adoc[]
+
+Request Parameters:
+
+include::{snippets}/user/create/request-fields.adoc[]
+
+Request HTTP Example:
+
+include::{snippets}/user/create/http-request.adoc[]
+
+==== Response
+
+Response Fields:
+
+include::{snippets}/user/create/response-fields.adoc[]
+
+Response HTTP Example:
+
+include::{snippets}/user/create/http-response.adoc[]

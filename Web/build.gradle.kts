@@ -17,19 +17,20 @@ tasks {
     }
 
     asciidoctor {
+        // 참조 https://asciidoctor.org/docs/asciidoctor-gradle-plugin/
+        asciidoctorj.attribute("snippets", snippetsDir)
         dependsOn(test)
-        sources {
-            include("**/index.adoc")
-        }
         baseDirFollowsSourceFile()
+        setOutputDir("src/main/resources/static/docs")
     }
 
-    asciidoctor.get().doLast {
+    // asciidoctorTask 에서 setOutputDir 로 파일 생성 위치를 지정하여 불필요해짐
+    /*asciidoctor.get().doLast {
         copy {
             from("${asciidoctor.get().outputDir}")
             into("src/main/resources/static/docs")
         }
-    }
+    }*/
 
     build {
         dependsOn(asciidoctor)
